@@ -1,0 +1,45 @@
+# ── Core ──────────────────────────────────────────────────────────────────────
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.7.0+cu128
+torchvision==0.22.0+cu128
+torchaudio==2.7.0+cu128
+transformers==4.44.0
+tokenizers==0.19.0
+accelerate==0.28.0
+sentencepiece==0.1.99
+
+# ── PEFT / Fine-tuning ─────────────────────────────────────────────────────────
+peft==0.11.0
+# bitsandbytes is not supported on native Windows. Install it only on Linux/WSL CUDA if needed.
+datasets==2.19.0
+trl==0.9.2                    # SFT trainer (optional, for advanced training)
+
+# ── Embeddings & RAG ──────────────────────────────────────────────────────────
+sentence-transformers==3.0.0
+# Do not install faiss-cpu here; this project requires a FAISS build with GPU APIs.
+
+# ── Multi-agent orchestration ─────────────────────────────────────────────────
+langgraph==0.1.1
+langchain-core==0.2.0
+langsmith>=0.1.0,<0.2.0
+
+# ── Web chat UI ───────────────────────────────────────────────────────────────
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+pydantic==2.7.1
+
+# ── Document parsing ──────────────────────────────────────────────────────────
+pdfplumber==0.11.0
+pymupdf==1.24.0               # fitz — fallback PDF extractor
+python-docx==1.1.0
+Pillow==10.0.0
+
+# ── Model downloading ─────────────────────────────────────────────────────────
+huggingface-hub==0.23.2
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+numpy==1.26.0
+packaging==23.2
+wheel==0.43.0
+tqdm==4.66.0
+python-dotenv==1.0.0

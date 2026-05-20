@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Agent - Gemini Theme</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-layout">
+        
+        <button id="toggle-sidebar" class="fixed-toggle-btn" title="Đóng/Mở thanh bên"><i class="fas fa-bars"></i></button>
+
+        <aside class="history-sidebar" id="history-sidebar">
+            <div class="sidebar-top">
+                <div style="flex: 1;"></div> 
+                <button id="new-chat-top-btn" class="icon-btn" title="Tạo mới"><i class="fas fa-pen-to-square"></i></button>
+            </div>
+
+            <button class="new-chat-btn" id="new-chat-btn">
+                <i class="fas fa-plus"></i> Cuộc trò chuyện mới
+            </button>
+
+            <div class="sidebar-section">
+                <h4 class="section-title">Gần đây</h4>
+                <div class="history-list" id="history-list">
+                    </div>
+            </div>
+
+            <div class="sidebar-bottom">
+                <button id="settings-btn" class="sidebar-item">
+                    <i class="fas fa-cog"></i> Cài đặt
+                </button>
+            </div>
+        </aside>
+
+        <main class="chat-container">
+            <header class="chat-header">
+                <div class="header-title">
+                    <span>Edu Chatbot</span>
+                </div>
+            </header>
+
+            <div class="chat-scroll-area">
+                <div class="chat-box" id="chat-box">
+                    </div>
+            </div>
+
+            <div class="chat-input-wrapper">
+                <div class="chat-input-container">
+                    
+                    <div class="attachment-wrapper">
+                        <button id="attach-btn" class="icon-btn tool-btn" title="Đính kèm tệp"><i class="fas fa-plus"></i></button>
+                        <div id="attach-menu" class="attach-menu">
+                            <button class="attach-item" id="upload-file-btn"><i class="fas fa-file-upload"></i> Tải tệp lên</button>
+                        </div>
+                        <!-- Hidden file inputs -->
+                        <input type="file" id="file-input" accept=".pdf,.docx,.doc,.txt,.md,.csv" style="display: none;">
+                    </div>
+
+                    <textarea id="user-input" placeholder="Hỏi Edu Chatbot..." rows="1"></textarea>
+                    <button id="send-btn" class="icon-btn send-btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <div class="disclaimer">
+                    Edu Chatbot có thể mắc sai sót. Hãy kiểm tra các thông tin quan trọng.
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 20px;">Cài đặt giao diện</h3>
+            <div class="setting-row">
+                <span>Chế độ nền sáng</span>
+                <label class="switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div style="text-align: right; margin-top: 20px;">
+                <button id="close-settings" class="close-btn">Xong</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
