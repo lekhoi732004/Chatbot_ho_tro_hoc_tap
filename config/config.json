@@ -1,0 +1,172 @@
+{
+  "llm": {
+    "executor": {
+      "model_path": "models/llm/qwen2.5-3b-instruct",
+      "model_name": "qwen2.5-3b-instruct-executor",
+      "max_new_tokens": 1024,
+      "temperature": 0.6,
+      "top_p": 0.9,
+      "device": "cuda"
+    },
+    "classifier": {
+      "model_path": "models/llm/qwen2.5-0.5b-instruct",
+      "model_name": "qwen2.5-0.5b-instruct-classifier",
+      "max_new_tokens": 256,
+      "temperature": 0.3,
+      "top_p": 0.9,
+      "device": "cuda"
+    },
+    "optimizer": {
+      "model_path": "models/llm/qwen2.5-0.5b-instruct",
+      "model_name": "qwen2.5-0.5b-instruct-optimizer",
+      "max_new_tokens": 512,
+      "temperature": 0.2,
+      "top_p": 0.9,
+      "device": "cuda"
+    },
+    "verifier": {
+      "model_path": "models/llm/qwen2.5-0.5b-instruct",
+      "model_name": "qwen2.5-0.5b-instruct-verifier",
+      "max_new_tokens": 256,
+      "temperature": 0.1,
+      "top_p": 0.8,
+      "device": "cuda"
+    }
+  },
+  "embedding": {
+    "model_path": "models/embedding/bge-base-en-v1.5",
+    "device": "cuda",
+    "batch_size": 32,
+    "max_length": 512,
+    "normalize": true
+  },
+  "reranker": {
+    "enabled": true,
+    "model_path": "models/reranker/bge-reranker-base",
+    "device": "cuda",
+    "top_k": 5,
+    "batch_size": 16,
+    "max_length": 512
+  },
+  "rag": {
+    "vectorstore_path": "vectorstore/faiss_index",
+    "top_k_retrieve": 10,
+    "top_k_rerank": 5,
+    "chunk_size": 512,
+    "chunk_overlap": 64,
+    "similarity_threshold": 0.5,
+    "hybrid_score_threshold": 0.25,
+    "user_upload_score_boost": 0.35,
+    "restrict_uploads_to_session": true,
+    "no_context_response": "Mình chưa tìm thấy dữ liệu đủ liên quan trong tài liệu hiện có. Bạn hãy cung cấp thêm thông tin, tải lên file liên quan hoặc hỏi cụ thể hơn để mình truy xuất chính xác.",
+    "faiss": {
+      "index_type": "ivf_hnsw_flat",
+      "device": "cuda",
+      "gpu_id": 0,
+      "nlist": 128,
+      "nprobe": 8,
+      "hnsw_m": 32
+    },
+    "bm25": {
+      "k1": 1.5,
+      "b": 0.75
+    },
+    "hybrid": {
+      "vector_weight": 0.65,
+      "bm25_weight": 0.35,
+      "candidate_k": 40
+    }
+  },
+  "agents": {
+    "classifier": {
+      "categories": [
+        "factual_qa",
+        "explanation",
+        "problem_solving",
+        "summarization",
+        "translation",
+        "code_generation",
+        "math",
+        "writing",
+        "general"
+      ],
+      "allowed_topics": [
+        "education",
+        "computer_science",
+        "artificial_intelligence",
+        "data_science",
+        "programming",
+        "mathematics",
+        "statistics",
+        "optimization",
+        "networking",
+        "databases",
+        "academic_writing"
+      ],
+      "confidence_threshold": 0.7,
+      "scope_threshold": 0.55,
+      "out_of_scope_response": "Câu hỏi này không nằm trong phạm vi học tập/chuyên môn của edu-agent. Vui lòng hỏi về giáo dục, CNTT, AI, khoa học dữ liệu, lập trình, toán-thống kê hoặc các môn học liên quan."
+    },
+    "optimizer": {
+      "max_iterations": 3,
+      "enable_cot": true,
+      "enable_few_shot": true
+    },
+    "executor": {
+      "timeout": 60,
+      "max_retries": 2
+    },
+    "verifier": {
+      "enable_fact_check": true,
+      "enable_hallucination_check": true,
+      "score_threshold": 0.7
+    }
+  },
+  "memory": {
+    "max_history": 20,
+    "enable_summary": true,
+    "summary_trigger": 10,
+    "judge_every": 5,
+    "persist": true,
+    "history_backend": "json",
+    "history_path": "data/chat_history",
+    "judge_strategy": "hybrid",
+    "judge_min_score": 0.35,
+    "judge_top_k": 12,
+    "judge_token_budget": 3000,
+    "always_keep_last_n": 4,
+    "judge_use_embedding": false,
+    "judge_llm_mode": "heuristic",
+    "recency_half_life_hours": 24.0,
+    "judge_weights": {
+      "recency": 0.25,
+      "informativeness": 0.2,
+      "relevance": 0.25,
+      "uniqueness": 0.15,
+      "role_weight": 0.1,
+      "user_signal": 0.05
+    }
+  },
+  "tools": {
+    "pdf": {
+      "max_pages": 200
+    },
+    "docx": {
+      "extract_tables": true,
+      "extract_images": false
+    }
+  },
+  "cache": {
+    "enabled": true,
+    "max_exact": 256,
+    "max_semantic": 128,
+    "semantic_threshold": 0.92,
+    "ttl_seconds": 3600,
+    "use_semantic": true
+  },
+  "logging": {
+    "level": "INFO",
+    "log_file": "logs/edu_agent.log",
+    "enable_console": true
+  }
+}
